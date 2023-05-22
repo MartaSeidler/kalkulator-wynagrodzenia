@@ -164,3 +164,6 @@ netto: {netto}
 potrącenia razem: {potracenia}
 kwota przelewu na konto: {przelew}
 """)
+
+# wyjście z programu
+wyjscie = input("Wciśnij Enter, aby wyjść z programu.")
