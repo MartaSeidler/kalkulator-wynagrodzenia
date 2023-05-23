@@ -1,24 +1,44 @@
-print("""
+def start():
+    print("""
 *** KALKULATOR WYNAGRODZENIA NETTO DO UMOWY O PRACĘ W 2023 ROKU ***
 """)
 
-brutto = int(input("Podaj wynagrodzenie brutto: "))
+def pobranie_wynagrodzenia_brutto():
+    brutto = int(input("Podaj wynagrodzenie brutto: "))
+    return brutto
 
+def obliczenie_skladki_emerytalnej(brutto):
+    skladka_emerytalna_procent = 9.76 / 100
+    skladka_emerytalna = round((skladka_emerytalna_procent * brutto), 2)
+    return skladka_emerytalna
 
-# obliczenie składek
-skladka_emerytalna_procent = 9.76 / 100
-skladka_rentowa_procent = 1.5 / 100
-skladka_chorobowa_procent = 2.45 / 100
+def obliczenie_skladki_rentowej(brutto):
+    skladka_rentowa_procent = 1.5 / 100
+    skladka_rentowa = round((skladka_rentowa_procent * brutto), 2)
+    return skladka_rentowa
 
-skladka_emerytalna = round((skladka_emerytalna_procent * brutto), 2)
-skladka_rentowa = round((skladka_rentowa_procent * brutto), 2)
-skladka_chorobowa = round((skladka_chorobowa_procent * brutto), 2)
+def obliczenie_skladki_chorobowej(brutto):
+    skladka_chorobowa_procent = 2.45 / 100
+    skladka_chorobowa = round((skladka_chorobowa_procent * brutto), 2)
+    return skladka_chorobowa
 
-skladki = skladka_emerytalna + skladka_rentowa + skladka_chorobowa
+def obliczenie_skladek_razem(skladka_emerytalna, skladka_rentowa, skladka_chorobowa):
+    skladki = skladka_emerytalna + skladka_rentowa + skladka_chorobowa
+    return skladki
 
-podstawa_skladki_zdrowotnej = brutto - skladki
-skladka_zdrowotna_procent = 9 / 100
-skladka_zdrowotna = round((skladka_zdrowotna_procent * podstawa_skladki_zdrowotnej), 2)
+def obliczenie_skladki_zdrowotnej(brutto, skladki):
+    podstawa_skladki_zdrowotnej = brutto - skladki
+    skladka_zdrowotna_procent = 9 / 100
+    skladka_zdrowotna = round((skladka_zdrowotna_procent * podstawa_skladki_zdrowotnej), 2)
+    return skladka_zdrowotna
+
+start()
+brutto = pobranie_wynagrodzenia_brutto()
+skladka_emerytalna = obliczenie_skladki_emerytalnej(brutto)
+skladka_rentowa = obliczenie_skladki_rentowej(brutto)
+skladka_chorobowa = obliczenie_skladki_chorobowej(brutto)
+skladki = obliczenie_skladek_razem(skladka_emerytalna, skladka_rentowa, skladka_chorobowa)
+skladka_zdrowotna = obliczenie_skladki_zdrowotnej(brutto, skladki)
 
 
 # obliczenie podatku
@@ -48,6 +68,7 @@ elif czy_ulga_podatkowa == "n":
 else:
     print("Błąd ulgi podatkowej")
 
+podstawa_skladki_zdrowotnej = brutto - skladki
 dochod = round(podstawa_skladki_zdrowotnej - koszty_uzyskania_przychodu)
 procent_podatku = 12 / 100
 podatek = round((procent_podatku * dochod), 2)
