@@ -20,6 +20,16 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="ProblemsViewState">
+    <hideBySeverity>
+      <option value="11" />
+      <option value="12" />
+      <option value="13" />
+      <option value="14" />
+      <option value="15" />
+      <option value="16" />
+    </hideBySeverity>
+  </component>
   <component name="ProjectId" id="2QA1SL8Pj2c6qDVvU0NTpf676yd" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
