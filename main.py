@@ -24,6 +24,7 @@ def obliczenie_kosztow_uzyskania_przychodu():
     t = tak
     n = nie
     """)
+
     while czy_koszty_zwiekszone.lower() not in ("t", "n"):
         print("    Wybrano nieistniejącą opcję.")
         czy_koszty_zwiekszone = input("    Wprowadź t lub n: ")
@@ -40,9 +41,11 @@ def obliczenie_ulgi_podatkowej():
     t = tak
     n = nie
     """)
+
     while czy_ulga_podatkowa.lower() not in ("t", "n"):
         print("    Wybrano nieistniejącą opcję.")
         czy_ulga_podatkowa = input("    Wprowadź t lub n: ")
+
     if czy_ulga_podatkowa.lower() == "t":
         return 300
     elif czy_ulga_podatkowa.lower() == "n":
@@ -55,9 +58,11 @@ def obliczenie_komornika(koszty_uzyskania_przychodu):
     t = tak
     n = nie
     """)
+
     while czy_komornik.lower() not in ("t", "n"):
         print("    Wybrano nieistniejącą opcję.")
         czy_komornik = input("    Wprowadź t lub n: ")
+
     if czy_komornik.lower() == "t":
         czy_alimenty = input("""
     Czy jest to potrącenie alimentacyjne?
@@ -77,6 +82,7 @@ def obliczenie_komornika(koszty_uzyskania_przychodu):
             elif koszty_uzyskania_przychodu == 250:
                 kwota_wolna_od_potracen = 2709.48
             return netto - kwota_wolna_od_potracen
+
     elif czy_komornik.lower() == "n":
         return 0
 
@@ -87,9 +93,11 @@ def obliczenie_ubezpiecznia():
     t = tak
     n = nie
     """)
+
     while czy_ubezpieczenie_grupowe.lower() not in ("t", "n"):
         print("    Wybrano nieistniejącą opcję.")
         czy_ubezpieczenie_grupowe = input("    Wprowadź t lub n: ")
+
     if czy_ubezpieczenie_grupowe.lower() == "t":
         kwota_ubezpieczenia = input("    Podaj kwotę miesięcznej składki (jako separatora dziesiętnego użyj kropki): ")
 
@@ -109,9 +117,11 @@ def obliczenie_raty_pozyczki():
     t = tak
     n = nie
     """)
+
     while czy_pozyczka.lower() not in ("t", "n"):
         print("    Wybrano nieistniejącą opcję.")
         czy_pozyczka = input("    Wprowadź t lub n: ")
+
     if czy_pozyczka.lower() == "t":
         rata = input("    Podaj kwotę miesięcznej raty (jako separatora dziesiętnego użyj kropki): ")
 
@@ -135,6 +145,7 @@ def obliczenie_innych_potracen():
     while czy_inne_potracenia.lower() not in ("t", "n"):
         print("    Wybrano nieistniejącą opcję.")
         czy_inne_potracenia = input("    Wprowadź t lub n: ")
+
     if czy_inne_potracenia.lower() == "t":
         inne = input("    Podaj kwotę jednomiesięcznego potrącenia (jako separatora dziesiętnego użyj kropki): ")
 
@@ -151,35 +162,43 @@ def obliczenie_innych_potracen():
 # uruchomienie programu
 start()
 brutto = pobranie_brutto()
+
 # procent składek
 skladka_emerytalna_procent = 9.76 / 100
 skladka_rentowa_procent = 1.5 / 100
 skladka_chorobowa_procent = 2.45 / 100
 skladka_zdrowotna_procent = 9 / 100
+
 # obliczenie składek
 skladka_emerytalna = obliczenie_skladki(skladka_emerytalna_procent, brutto)
 skladka_rentowa = obliczenie_skladki(skladka_rentowa_procent, brutto)
 skladka_chorobowa = obliczenie_skladki(skladka_chorobowa_procent, brutto)
 skladki = round((skladka_emerytalna + skladka_rentowa + skladka_chorobowa), 2)
 skladka_zdrowotna = obliczenie_skladki(skladka_zdrowotna_procent, (brutto - skladki))
+
 # obliczenie dochodu
 koszty_uzyskania_przychodu = obliczenie_kosztow_uzyskania_przychodu()
 dochod = round(brutto - skladki - koszty_uzyskania_przychodu)
+
 # obliczenie podatku
 procent_podatku = 12 / 100
 podatek = round((procent_podatku * dochod), 2)
 ulga_podatkowa = obliczenie_ulgi_podatkowej()
 zaliczka_na_podatek = round(podatek - ulga_podatkowa)
+
 # obliczenie kwoty netto
 netto = round((brutto - skladki - skladka_zdrowotna - zaliczka_na_podatek), 2)
+
 # obliczenie potrąceń
 komornik = obliczenie_komornika(koszty_uzyskania_przychodu)
 ubezpieczenie = obliczenie_ubezpiecznia()
 rata_pozyczki = obliczenie_raty_pozyczki()
 inne_potracenia = obliczenie_innych_potracen()
 potracenia = round((komornik + ubezpieczenie + rata_pozyczki + inne_potracenia), 2)
+
 # obliczenie przelewu na konto
 przelew = round((netto - potracenia), 2)
+
 # wydruk wyników
 print(f"""
             * * *
