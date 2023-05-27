@@ -5,13 +5,13 @@ def start():
 
 
 def pobranie_brutto():
-    brutto = input("    Podaj wynagrodzenie brutto: ")
+    wartosc_brutto = input("    Podaj wynagrodzenie brutto: ")
 
-    while brutto.isalpha() == True or float(brutto) <= 0:
+    while wartosc_brutto.isalpha() == True or float(wartosc_brutto) <= 0:
         print("     Błąd! Podaj dodatnią wartość liczbową.")
-        brutto = input("    Podaj wynagrodzenie brutto: ")
+        wartosc_brutto = input("    Podaj wynagrodzenie brutto: ")
 
-    return float(brutto)
+    return float(wartosc_brutto)
 
 
 def obliczenie_skladki(procent, podstawa):
@@ -52,7 +52,7 @@ def obliczenie_ulgi_podatkowej():
         return 0
 
 
-def obliczenie_komornika(koszty_uzyskania_przychodu):
+def obliczenie_komornika():
     czy_komornik = input("""
     Czy masz zajęcie komornicze?
     t = tak
@@ -79,9 +79,10 @@ def obliczenie_komornika(koszty_uzyskania_przychodu):
         else:
             if koszty_uzyskania_przychodu == 300:
                 kwota_wolna_od_potracen = 2715.48
+                return netto - kwota_wolna_od_potracen
             elif koszty_uzyskania_przychodu == 250:
                 kwota_wolna_od_potracen = 2709.48
-            return netto - kwota_wolna_od_potracen
+                return netto - kwota_wolna_od_potracen
 
     elif czy_komornik.lower() == "n":
         return 0
@@ -190,7 +191,7 @@ zaliczka_na_podatek = round(podatek - ulga_podatkowa)
 netto = round((brutto - skladki - skladka_zdrowotna - zaliczka_na_podatek), 2)
 
 # obliczenie potrąceń
-komornik = obliczenie_komornika(koszty_uzyskania_przychodu)
+komornik = obliczenie_komornika()
 ubezpieczenie = obliczenie_ubezpiecznia()
 rata_pozyczki = obliczenie_raty_pozyczki()
 inne_potracenia = obliczenie_innych_potracen()
